@@ -36,8 +36,8 @@ export function simplexNoise2D(
   const mask = depth - 1;
   const p = genPerm(depth, random);
 
-  const perm = new Uint8Array(depth * 2);
-  const permMod12 = new Uint8Array(depth * 2);
+  const perm = new Array(depth * 2);
+  const permMod12 = new Array(depth * 2);
   for (let i = 0; i < depth * 2; i++) {
     perm[i] = p[i & mask];
     permMod12[i] = perm[i] % 12;

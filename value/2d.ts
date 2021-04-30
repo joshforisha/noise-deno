@@ -2,7 +2,7 @@
 
 import { Noise2D } from "../noise.ts";
 import { ValueNoiseOptions } from "./options.ts";
-import { lerp } from "./_lerp.ts";
+import { lerp } from "../_utils.ts";
 
 export function valueNoise2D(
   { depth = 512, random = Math.random }: ValueNoiseOptions = {},

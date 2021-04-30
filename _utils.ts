@@ -1,8 +1,13 @@
 export function genPerm(
   depth: number,
   random: () => number,
-): Uint8Array {
-  const p = new Uint8Array(depth);
+): Uint8Array | Uint16Array | Uint32Array {
+  const p = depth < 257
+    ? new Uint8Array(depth)
+    : depth < 65537
+    ? new Uint16Array(depth)
+    : new Uint32Array(depth);
+
   for (let i = 0; i < depth; i++) p[i] = i;
 
   const mask = depth - 1;
@@ -16,4 +21,15 @@ export function genPerm(
   }
 
   return p;
+}
+
+/**
+ * Linear interpolation
+ * @param low The lower limit value
+ * @param high The higher limit value
+ * @param t The value to interpolate
+ * @returns number
+ */
+export function lerp(low: number, high: number, t: number): number {
+  return low * (1 - t) + high * t;
 }

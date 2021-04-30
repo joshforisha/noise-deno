@@ -4,18 +4,11 @@ Noise algorithms for Deno.
 
 ## Function Types
 
-### Noise1D
+All noise functions output a float between -1 and 1.
 
-A function that accepts a single `x: number` and returns a `number` in `(-1.0, 1.0)`.
-
-### Noise2D
-
-A function that accepts `x: number` and `y: number`; returns a `number` in `(-1.0, 1.0)`.
-
-### Noise3D
-
-A function that accepts `x: number`, `y: number`, and `z: number`; returns a `number` in `(-1.0, 1.0)`.
-
-### Noise4D
-
-A function that accepts `x: number`, `y: number`, `z: number`, and `w: number`; returns a `number` in `(-1.0, 1.0)`.
+```typescript
+type Noise1D = (x: number) => number;
+type Noise1D = (x: number, y: number) => number;
+type Noise1D = (x: number, y: number, z: number) => number;
+type Noise1D = (x: number, y: number, z: number, w: number) => number;
+```
