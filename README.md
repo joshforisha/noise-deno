@@ -6,7 +6,7 @@ A variety of standardized noise algorithms for Deno.
 
 - OpenSimplex noise: 2D, 3D, 4D
 - Perlin noise: 2D, 3D, 4D
-- (Fast) Simplex noise: 2D, 3D, 4D
+- Simplex noise: 2D, 3D, 4D
 - Value noise: 1D, 2D, 3D, 4D
 
 ## Usage
