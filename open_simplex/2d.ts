@@ -4,7 +4,7 @@ import { Noise2D } from "../noise.ts";
 import { NoiseOptions } from "../options.ts";
 import { genPerm } from "../_utils.ts";
 
-const Norm2D = 1.0 / 47.0;
+const Norm2D = 1.0 / 53.0;
 const Squish2D = (Math.sqrt(3) - 1) / 2;
 const Stretch2D = (1 / Math.sqrt(3) - 1) / 2;
 
