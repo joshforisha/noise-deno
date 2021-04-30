@@ -4,16 +4,20 @@ Noise algorithms for Deno.
 
 [https://deno.land/x/noise](https://deno.land/x/noise)
 
-## Types of Noise
+## Usage
 
-### Fast Simplex
+### Noise1D
 
-An implementation of the improved, faster Simplex algorithm outlined in Stefan Gustavson's [Simplex noise demystified](https://weber.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf).
+A function that accepts a single `x: number` and returns a `number` in `(-1.0, 1.0)`.
 
-### Fractal
+### Noise2D
 
-A collection of functions to allow any of the noise type functions to be stacked into octaves with various parameters and summed to give fractal noise results.
+A function that accepts `x: number` and `y: number`; returns a `number` in `(-1.0, 1.0)`.
 
-### OpenSimplex
+### Noise3D
 
-Due to the [legal status](https://en.wikipedia.org/wiki/Simplex_noise#Legal_status) issues currently surrounding the Simplex algorithm, [OpenSimplex noise](https://en.wikipedia.org/wiki/OpenSimplex_noise) was created.
+A function that accepts `x: number`, `y: number`, and `z: number`; returns a `number` in `(-1.0, 1.0)`.
+
+### Noise4D
+
+A function that accepts `x: number`, `y: number`, `z: number`, and `w: number`; returns a `number` in `(-1.0, 1.0)`.
