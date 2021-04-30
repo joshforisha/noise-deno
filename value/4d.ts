@@ -1,11 +1,11 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise4D } from "../noise.ts";
-import { ValueNoiseOptions } from "./options.ts";
+import { NoiseOptions } from "../options.ts";
 import { lerp } from "../_utils.ts";
 
 export function valueNoise4D(
-  { depth = 128, random = Math.random }: ValueNoiseOptions = {},
+  { depth = 128, random = Math.random }: NoiseOptions = {},
 ): Noise4D {
   const mask = depth - 1;
   const p: Float64Array[][][] = [];

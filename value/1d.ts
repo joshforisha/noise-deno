@@ -1,11 +1,11 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise1D } from "../noise.ts";
-import { ValueNoiseOptions } from "./options.ts";
+import { NoiseOptions } from "../options.ts";
 import { lerp } from "../_utils.ts";
 
 export function valueNoise1D(
-  { depth = 1024, random = Math.random }: ValueNoiseOptions = {},
+  { depth = 1024, random = Math.random }: NoiseOptions = {},
 ): Noise1D {
   const mask = depth - 1;
   const p = new Float64Array(depth);

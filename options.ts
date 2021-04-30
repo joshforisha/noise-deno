@@ -1,4 +1,4 @@
-export interface ValueNoiseOptions {
+export interface NoiseOptions {
   depth?: number;
   random?: () => number;
 }

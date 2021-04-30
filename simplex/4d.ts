@@ -8,9 +8,9 @@
  * attribution is appreciated.
  */
 
-import { genPerm } from "../_utils.ts";
 import { Noise4D } from "../noise.ts";
-import { SimplexOptions } from "./options.ts";
+import { NoiseOptions } from "../options.ts";
+import { genPerm } from "../_utils.ts";
 
 const G4 = (5.0 - Math.sqrt(5.0)) / 20.0;
 
@@ -50,7 +50,7 @@ const Grad = [
 ];
 
 export function simplexNoise4D(
-  { depth = 512, random = Math.random }: SimplexOptions = {},
+  { depth = 512, random = Math.random }: NoiseOptions = {},
 ): Noise4D {
   const mask = depth - 1;
   const p = genPerm(depth, random);

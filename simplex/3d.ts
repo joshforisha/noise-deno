@@ -8,9 +8,9 @@
  * attribution is appreciated.
  */
 
-import { genPerm } from "../_utils.ts";
 import { Noise3D } from "../noise.ts";
-import { SimplexOptions } from "./options.ts";
+import { NoiseOptions } from "../options.ts";
+import { genPerm } from "../_utils.ts";
 
 const G3 = 1.0 / 6.0;
 
@@ -30,7 +30,7 @@ const Grad = [
 ];
 
 export function simplexNoise3D(
-  { depth = 512, random = Math.random }: SimplexOptions = {},
+  { depth = 512, random = Math.random }: NoiseOptions = {},
 ): Noise3D {
   const mask = depth - 1;
   const p = genPerm(depth, random);
