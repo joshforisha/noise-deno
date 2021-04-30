@@ -15,7 +15,7 @@ An interface used with each fractal noise function, containing:
 
 ### cubic
 
-Accepts a `Noise3D` and an optional `FractalOptions`; returns a `Noise3D` for fractal noise in three dimensions.
+Accepts a `Noise3D`, a `circumference: number`, and an optional `FractalOptions`; returns a `Noise3D` for fractal noise in three dimensions.
 
 ### cylindrical
 
@@ -31,4 +31,4 @@ Accepts a `Noise2D` and an optional `FractalOptions`; returns a `Noise2D` for fr
 
 ### spherical
 
-Accepts a `Noise3D` and an optional `FractalOptions`; returns a `Noise2D` for fractal noise on a sphere's surface with two dimensional coordinates.
+Accepts a `Noise3D`, a `circumference: number`, and an optional `FractalOptions`; returns a `Noise2D` for fractal noise on a sphere's surface with two dimensional coordinates.
