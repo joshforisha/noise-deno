@@ -6,7 +6,7 @@ This is an updated implementation of the improved, faster Simplex algorithm outl
 
 ### SimplexOptions
 
-An interface used in each Simplex function, containing `depth` (size of permutation table; default `512`) and `random` (a pseudo-random number generator with output in `(0.0, 1.0)`; default if `Math.random`).
+An interface used in each Simplex function, containing `depth` (size of permutation table, default: `512`) and `random` (a pseudo-random number generator with output in `(0.0, 1.0)`, default: `Math.random`).
 
 ### simplexNoise2D
 

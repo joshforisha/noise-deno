@@ -2,9 +2,7 @@
 
 Noise algorithms for Deno.
 
-[https://deno.land/x/noise](https://deno.land/x/noise)
-
-## Usage
+## Function Types
 
 ### Noise1D
 
