@@ -11,6 +11,7 @@
 import { Noise2D } from "../noise.ts";
 import { SimplexOptions } from "./options.ts";
 
+const F2 = 0.5 * (Math.sqrt(3.0) - 1.0);
 const G2 = (3.0 - Math.sqrt(3.0)) / 6.0;
 
 const Grad = [
@@ -34,10 +35,10 @@ export function simplexNoise2D(
   const p = new Uint8Array(depth);
   for (let i = 0; i < depth; i++) p[i] = i;
 
-  const max = depth - 1;
+  const mask = depth - 1;
   let n: number;
   let q: number;
-  for (let i = depth - 1; i > 0; i--) {
+  for (let i = mask; i > 0; i--) {
     n = Math.floor((i + 1) * random());
     q = p[i];
     p[i] = p[n];
@@ -47,20 +48,18 @@ export function simplexNoise2D(
   const perm = new Uint8Array(depth * 2);
   const permMod12 = new Uint8Array(depth * 2);
   for (let i = 0; i < depth * 2; i++) {
-    perm[i] = p[i & (depth - 1)];
+    perm[i] = p[i & mask];
     permMod12[i] = perm[i] % 12;
   }
 
   return (x: number, y: number): number => {
     // Skew the input space to determine which simplex cell we're in
-    const s = (x + y) * 0.5 * (Math.sqrt(3.0) - 1.0); // Hairy factor for 2D
+    const s = (x + y) * F2; // Hairy factor for 2D
     const i = Math.floor(x + s);
     const j = Math.floor(y + s);
     const t = (i + j) * G2;
-    const X0 = i - t; // Unskew the cell origin back to (x,y) space
-    const Y0 = j - t;
-    const x0 = x - X0; // The x,y distances from the cell origin
-    const y0 = y - Y0;
+    const x0 = x - (i - t); // The x,y distances from the cell origin
+    const y0 = y - (j - t);
 
     // Determine which simplex we are in.
     const i1 = x0 > y0 ? 1 : 0;
@@ -73,24 +72,24 @@ export function simplexNoise2D(
     const y2 = y0 - 1.0 + 2.0 * G2;
 
     // Work out the hashed gradient indices of the three simplex corners
-    const ii = i & max;
-    const jj = j & max;
+    const ii = i & mask;
+    const jj = j & mask;
     const g0 = Grad[permMod12[ii + perm[jj]]];
     const g1 = Grad[permMod12[ii + i1 + perm[jj + j1]]];
     const g2 = Grad[permMod12[ii + 1 + perm[jj + 1]]];
 
     // Calculate the contribution from the three corners
     const t0 = 0.5 - x0 * x0 - y0 * y0;
-    const n0 = t0 < 0 ? 0.0 : Math.pow(t0, 4) * (g0[0] * x0 + g0[1] * y0);
+    const n0 = t0 < 0 ? 0.0 : t0 ** 4 * (g0[0] * x0 + g0[1] * y0);
 
     const t1 = 0.5 - x1 * x1 - y1 * y1;
-    const n1 = t1 < 0 ? 0.0 : Math.pow(t1, 4) * (g1[0] * x1 + g1[1] * y1);
+    const n1 = t1 < 0 ? 0.0 : t1 ** 4 * (g1[0] * x1 + g1[1] * y1);
 
     const t2 = 0.5 - x2 * x2 - y2 * y2;
-    const n2 = t2 < 0 ? 0.0 : Math.pow(t2, 4) * (g2[0] * x2 + g2[1] * y2);
+    const n2 = t2 < 0 ? 0.0 : t2 ** 4 * (g2[0] * x2 + g2[1] * y2);
 
     // Add contributions from each corner to get the final noise value.
-    // The result is scaled to return values in the interval (-1, 1).
+    // The result is scaled to return values in the interval [-1, 1].
     return 70.14805770654148 * (n0 + n1 + n2);
   };
 }

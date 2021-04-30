@@ -54,10 +54,10 @@ export function simplexNoise4D(
   const p = new Uint8Array(depth);
   for (let i = 0; i < depth; i++) p[i] = i;
 
-  const max = depth - 1;
+  const mask = depth - 1;
   let n: number;
   let q: number;
-  for (let i = max; i > 0; i--) {
+  for (let i = mask; i > 0; i--) {
     n = Math.floor((i + 1) * random());
     q = p[i];
     p[i] = p[n];
@@ -67,7 +67,7 @@ export function simplexNoise4D(
   const perm = new Uint8Array(depth * 2);
   const permMod12 = new Uint8Array(depth * 2);
   for (let i = 0; i < depth * 2; i++) {
-    perm[i] = p[i & max];
+    perm[i] = p[i & mask];
     permMod12[i] = perm[i] % 12;
   }
 
@@ -147,10 +147,10 @@ export function simplexNoise4D(
     const w4 = w0 - 1.0 + 4.0 * G4;
 
     // Work out the hashed gradient indices of the five simplex corners
-    const ii = i & max;
-    const jj = j & max;
-    const kk = k & max;
-    const ll = l & max;
+    const ii = i & mask;
+    const jj = j & mask;
+    const kk = k & mask;
+    const ll = l & mask;
     const g0 = Grad[
       perm[ii + perm[jj + perm[kk + perm[ll]]]] %
       32
