@@ -22,7 +22,7 @@ export function bezier(
 
 /**
  * Generates a function for cubic interpolation between two values, based on
- * an skew factor.
+ * a skew factor.
  * @param {number} factor - Float to skew first and last control values with
  * @returns {function} Interpolate function
  */
@@ -34,7 +34,7 @@ export function cerp(factor: number): Interpolate {
 }
 
 /**
- * Linear interpolates between two values.
+ * Linearly interpolates between two values.
  * @param {number} low
  * @param {number} high
  * @param {number} t Something about t
