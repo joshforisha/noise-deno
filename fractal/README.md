@@ -13,21 +13,31 @@ An interface used with each fractal noise function, containing:
 - `octaves: number` An integer, how many octaves to stack the noise function (default: `1`)
 - `persistence: number` A float, defines the scaling of amplitude between octaves (default: `0.5`)
 
+![Cubic noise example](../images/cubic.png)
+
 ### cubic
 
 Accepts a `Noise3D`, a `circumference: number`, and an optional `FractalOptions`; returns a `Noise3D` for fractal noise in three dimensions.
+
+![Cylindrical noise example](../images/cylindrical.png)
 
 ### cylindrical
 
 Accepts a `Noise3D` and an optional `FractalOptions`; returns a `Noise2D` for fractal noise on a cylinder's surface. This allows for "wrapped" textures across the x-axis when drawn in two dimensions.
 
+![Linear noise example](../images/linear.png)
+
 ### linear
 
 Accepts a `Noise1D` and an optional `FractalOptions`; returns a `Noise1D` for fractal noise in one dimension.
 
+![Rectangular noise example](../images/rectangular.png)
+
 ### rectangular
 
 Accepts a `Noise2D` and an optional `FractalOptions`; returns a `Noise2D` for fractal noise in two dimensions.
+
+![Spherical noise example](../images/spherical.png)
 
 ### spherical
 
