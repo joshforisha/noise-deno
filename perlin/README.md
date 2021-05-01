@@ -4,14 +4,25 @@ This module implements Ken Perlin's original algorithm for noise generation.
 
 ## Usage
 
-### perlinNoise2D
+### PerlinOptions
 
-Accepts `NoiseOptions` and returns a `Noise2D` function.
+An interface that extends `NoiseOptions` and allows for setting an alternative interpolation function as `mix` (default: `lerp`). Optionally passed to each perlin noise function.
 
-### perlinNoise3D
+### perlinNoise{2D, 3D, 4D}
 
-Accepts `NoiseOptions` and returns a `Noise3D` function.
+Each function accepts `PerlinOptions`, generates and returns a relevant dimensional noise function.
 
-### perlinNoise4D
+```typescript
+import { perlinNoise3D } from "https://deno.land/x/noise/mod.ts";
 
-Accepts `NoiseOptions` and returns a `Noise4D` function.
+// Generate a 3D noise function with defaults
+const noise = perlinNoise2D();
+
+for (let x = 0; x < 100; x++) {
+  for (let y = 0; y < 50; y++) {
+    for (let z = 0; z < 50; z++) {
+      console.log(noise(x, y, z));
+    }
+  }
+}
+```

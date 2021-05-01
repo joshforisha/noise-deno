@@ -4,20 +4,25 @@ This module contains functions that are relatively naive implementations of simp
 
 ## Usage
 
-The default `depth` for `NoiseOptions` for these functions is dependent on the dimension of the noise, due to the exponential permutation requirements for higher dimensions.
+### ValueOptions
 
-### valueNoise1D
+An interface that extends `NoiseOptions` and allows for setting an alternative interpolation function as `mix` (default: `lerp`). Optionally passed to each value noise function.
 
-Accepts `NoiseOptions` (default `depth` is `1024`) and returns a `Noise1D` function.
+The default `depth` value for these functions is dependent on the dimension of the noise, due to the exponential permutation requirements for higher dimensions.
 
-### valueNoise2D
+### valueNoise{1D, 2D, 3D, 4D}
 
-Accepts `NoiseOptions` (default `depth` is `512`) and returns a `Noise2D` function.
+Each function accepts `ValueOptions`, generates and returns a relevant dimensional noise function.
 
-### valueNoise3D
+```typescript
+import { cerp, valueNoise2D } from "https://deno.land/x/noise/mod.ts";
 
-Accepts `NoiseOptions` (default `depth` is `256`) and returns a `Noise3D` function.
+// Generate a 2D noise function with smoother cubic interpolation
+const noise = valueNoise2D({ mix: cerp(0.1) });
 
-### valueNoise4D
-
-Accepts `NoiseOptions` (default `depth` is `128`) and returns a `Noise4D` function.
+for (let x = 0; x < 10; x++) {
+  for (let y = 0; y < 5; y++) {
+    console.log(noise(x, y));
+  }
+}
+```

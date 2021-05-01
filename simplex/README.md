@@ -4,14 +4,19 @@ This is an updated implementation of the improved, faster Simplex algorithm outl
 
 ## Usage
 
-### simplexNoise2D
+### simplexNoise{2D, 3D, 4D}
 
-Accepts `NoiseOptions` and returns a `Noise2D` function.
+Each function accepts `NoiseOptions`, generates and returns a relevant dimensional noise function.
 
-### simplexNoise3D
+```typescript
+import { simplexNoise2D } from "https://deno.land/x/noise/mod.ts";
 
-Accepts `NoiseOptions` and returns a `Noise3D` function.
+// Generate a 2D noise function
+const noise = simplexNoise2D();
 
-### simplexNoise4D
-
-Accepts `NoiseOptions` and returns a `Noise4D` function.
+for (let x = 0; x < 10; x++) {
+  for (let y = 0; y < 5; y++) {
+    console.log(noise(x, y);
+  }
+}
+```
