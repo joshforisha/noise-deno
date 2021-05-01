@@ -1,8 +1,9 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise4D } from "../noise.ts";
-import { NoiseOptions } from "../options.ts";
-import { genPerm, lerp } from "../_utils.ts";
+import { PerlinOptions } from "./options.ts";
+import { genPerm } from "../_utils.ts";
+import { lerp } from "../math.ts";
 
 const Grad = [
   [0, 1, 1, 1],
@@ -40,7 +41,7 @@ const Grad = [
 ];
 
 export function perlinNoise4D(
-  { depth = 256, random = Math.random }: NoiseOptions = {},
+  { depth = 256, mix = lerp, random = Math.random }: PerlinOptions = {},
 ): Noise4D {
   const mask = depth - 1;
   const p = genPerm(depth, random);
@@ -122,29 +123,29 @@ export function perlinNoise4D(
       g1111[3] * (w - 1);
 
     // Interpolate contributions together
-    return lerp(
-      lerp(
-        lerp(
-          lerp(n0000, n1000, x),
-          lerp(n0100, n1100, x),
+    return mix(
+      mix(
+        mix(
+          mix(n0000, n1000, x),
+          mix(n0100, n1100, x),
           y,
         ),
-        lerp(
-          lerp(n0010, n1010, x),
-          lerp(n0110, n1110, x),
+        mix(
+          mix(n0010, n1010, x),
+          mix(n0110, n1110, x),
           y,
         ),
         z,
       ),
-      lerp(
-        lerp(
-          lerp(n0001, n1001, x),
-          lerp(n0101, n1101, x),
+      mix(
+        mix(
+          mix(n0001, n1001, x),
+          mix(n0101, n1101, x),
           y,
         ),
-        lerp(
-          lerp(n0011, n1011, x),
-          lerp(n0111, n1111, x),
+        mix(
+          mix(n0011, n1011, x),
+          mix(n0111, n1111, x),
           y,
         ),
         z,

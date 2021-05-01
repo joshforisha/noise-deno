@@ -1,11 +1,11 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise2D } from "../noise.ts";
-import { NoiseOptions } from "../options.ts";
-import { lerp } from "../_utils.ts";
+import { ValueOptions } from "./options.ts";
+import { lerp } from "../math.ts";
 
 export function valueNoise2D(
-  { depth = 512, random = Math.random }: NoiseOptions = {},
+  { depth = 512, mix = lerp, random = Math.random }: ValueOptions = {},
 ): Noise2D {
   const mask = depth - 1;
   const p: Float64Array[] = [];
@@ -25,9 +25,9 @@ export function valueNoise2D(
     const y1 = Math.floor(y0);
     const y2 = (y1 + 1) % mask;
 
-    return lerp(
-      lerp(p[x1][y1], p[x2][y1], x0 - x1),
-      lerp(p[x1][y2], p[x2][y2], x0 - x1),
+    return mix(
+      mix(p[x1][y1], p[x2][y1], x0 - x1),
+      mix(p[x1][y2], p[x2][y2], x0 - x1),
       y0 - y1,
     );
   };

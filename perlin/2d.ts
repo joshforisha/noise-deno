@@ -1,8 +1,9 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise2D } from "../noise.ts";
-import { NoiseOptions } from "../options.ts";
-import { genPerm, lerp } from "../_utils.ts";
+import { PerlinOptions } from "./options.ts";
+import { genPerm } from "../_utils.ts";
+import { lerp } from "../math.ts";
 
 const Grad = [
   [1, 1],
@@ -14,7 +15,7 @@ const Grad = [
 ];
 
 export function perlinNoise2D(
-  { depth = 256, random = Math.random }: NoiseOptions = {},
+  { depth = 256, mix = lerp, random = Math.random }: PerlinOptions = {},
 ): Noise2D {
   const mask = depth - 1;
   const p = genPerm(depth, random);
@@ -50,9 +51,9 @@ export function perlinNoise2D(
     const n11 = g11[0] * (x - 1) + g11[1] * (y - 1);
 
     // Interpolate contributions together
-    return lerp(
-      lerp(n00, n10, x),
-      lerp(n01, n11, x),
+    return mix(
+      mix(n00, n10, x),
+      mix(n01, n11, x),
       y,
     );
   };

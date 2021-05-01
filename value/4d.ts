@@ -1,11 +1,11 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise4D } from "../noise.ts";
-import { NoiseOptions } from "../options.ts";
-import { lerp } from "../_utils.ts";
+import { ValueOptions } from "./options.ts";
+import { lerp } from "../math.ts";
 
 export function valueNoise4D(
-  { depth = 128, random = Math.random }: NoiseOptions = {},
+  { depth = 128, mix = lerp, random = Math.random }: ValueOptions = {},
 ): Noise4D {
   const mask = depth - 1;
   const p: Float64Array[][][] = [];
@@ -39,29 +39,29 @@ export function valueNoise4D(
     const w1 = Math.floor(w0);
     const w2 = (w1 + 1) % mask;
 
-    return lerp(
-      lerp(
-        lerp(
-          lerp(p[x1][y1][z1][w1], p[x2][y1][z1][w1], x0 - x1),
-          lerp(p[x1][y2][z1][w1], p[x2][y2][z1][w1], x0 - x1),
+    return mix(
+      mix(
+        mix(
+          mix(p[x1][y1][z1][w1], p[x2][y1][z1][w1], x0 - x1),
+          mix(p[x1][y2][z1][w1], p[x2][y2][z1][w1], x0 - x1),
           y0 - y1,
         ),
-        lerp(
-          lerp(p[x1][y1][z2][w1], p[x2][y1][z2][w1], x0 - x1),
-          lerp(p[x1][y2][z2][w1], p[x2][y2][z2][w1], x0 - x1),
+        mix(
+          mix(p[x1][y1][z2][w1], p[x2][y1][z2][w1], x0 - x1),
+          mix(p[x1][y2][z2][w1], p[x2][y2][z2][w1], x0 - x1),
           y0 - y1,
         ),
         z0 - z1,
       ),
-      lerp(
-        lerp(
-          lerp(p[x1][y1][z1][w2], p[x2][y1][z1][w2], x0 - x1),
-          lerp(p[x1][y2][z1][w2], p[x2][y2][z1][w2], x0 - x1),
+      mix(
+        mix(
+          mix(p[x1][y1][z1][w2], p[x2][y1][z1][w2], x0 - x1),
+          mix(p[x1][y2][z1][w2], p[x2][y2][z1][w2], x0 - x1),
           y0 - y1,
         ),
-        lerp(
-          lerp(p[x1][y1][z2][w2], p[x2][y1][z2][w2], x0 - x1),
-          lerp(p[x1][y2][z2][w2], p[x2][y2][z2][w2], x0 - x1),
+        mix(
+          mix(p[x1][y1][z2][w2], p[x2][y1][z2][w2], x0 - x1),
+          mix(p[x1][y2][z2][w2], p[x2][y2][z2][w2], x0 - x1),
           y0 - y1,
         ),
         z0 - z1,

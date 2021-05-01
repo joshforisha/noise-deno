@@ -1,4 +1,5 @@
 export * from "./fractal/mod.ts";
+export * from "./math.ts";
 export * from "./noise.ts";
 export * from "./open_simplex/mod.ts";
 export * from "./options.ts";

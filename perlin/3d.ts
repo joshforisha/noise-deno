@@ -1,8 +1,9 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise3D } from "../noise.ts";
-import { NoiseOptions } from "../options.ts";
-import { genPerm, lerp } from "../_utils.ts";
+import { PerlinOptions } from "./options.ts";
+import { genPerm } from "../_utils.ts";
+import { lerp } from "../math.ts";
 
 const Grad = [
   [1, 1, 0],
@@ -24,7 +25,7 @@ function fade(t: number): number {
 }
 
 export function perlinNoise3D(
-  { depth = 256, random = Math.random }: NoiseOptions = {},
+  { depth = 256, mix = lerp, random = Math.random }: PerlinOptions = {},
 ): Noise3D {
   const mask = depth - 1;
   const p = genPerm(depth, random);
@@ -76,15 +77,15 @@ export function perlinNoise3D(
     const w = fade(z);
 
     // Interpolate contributions together
-    return 1.5 * lerp(
-      lerp(
-        lerp(n000, n100, u),
-        lerp(n010, n110, u),
+    return 1.5 * mix(
+      mix(
+        mix(n000, n100, u),
+        mix(n010, n110, u),
         v,
       ),
-      lerp(
-        lerp(n001, n101, u),
-        lerp(n011, n111, u),
+      mix(
+        mix(n001, n101, u),
+        mix(n011, n111, u),
         v,
       ),
       w,

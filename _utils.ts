@@ -1,3 +1,20 @@
+/*
+ * Constrains the `x` between `min` and `max`.
+ * @param {number} min
+ * @param {number} max
+ * @param {number} x
+ * @returns {number} The constrained value
+ */
+export function clamp(min: number, max: number, x: number): number {
+  return Math.max(min, Math.min(max, x));
+}
+
+/*
+ * Generates a permutation table.
+ * @param {number} depth
+ * @param {function} random
+ * @returns {number[]} Generated typed array of floats
+ */
 export function genPerm(
   depth: number,
   random: () => number,
@@ -21,15 +38,4 @@ export function genPerm(
   }
 
   return p;
-}
-
-/**
- * Linear interpolation
- * @param low The lower limit value
- * @param high The higher limit value
- * @param t The value to interpolate
- * @returns number
- */
-export function lerp(low: number, high: number, t: number): number {
-  return low * (1 - t) + high * t;
 }

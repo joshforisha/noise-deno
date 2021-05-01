@@ -1,11 +1,11 @@
 // This is free and unencumbered software released into the public domain
 
 import { Noise3D } from "../noise.ts";
-import { NoiseOptions } from "../options.ts";
-import { lerp } from "../_utils.ts";
+import { ValueOptions } from "./options.ts";
+import { lerp } from "../math.ts";
 
 export function valueNoise3D(
-  { depth = 256, random = Math.random }: NoiseOptions = {},
+  { depth = 256, mix = lerp, random = Math.random }: ValueOptions = {},
 ): Noise3D {
   const mask = depth - 1;
   const p: Float64Array[][] = [];
@@ -35,15 +35,15 @@ export function valueNoise3D(
     const z1 = Math.floor(z0);
     const z2 = (z1 + 1) % mask;
 
-    return lerp(
-      lerp(
-        lerp(p[x1][y1][z1], p[x2][y1][z1], x0 - x1),
-        lerp(p[x1][y2][z1], p[x2][y2][z1], x0 - x1),
+    return mix(
+      mix(
+        mix(p[x1][y1][z1], p[x2][y1][z1], x0 - x1),
+        mix(p[x1][y2][z1], p[x2][y2][z1], x0 - x1),
         y0 - y1,
       ),
-      lerp(
-        lerp(p[x1][y1][z2], p[x2][y1][z2], x0 - x1),
-        lerp(p[x1][y2][z2], p[x2][y2][z2], x0 - x1),
+      mix(
+        mix(p[x1][y1][z2], p[x2][y1][z2], x0 - x1),
+        mix(p[x1][y2][z2], p[x2][y2][z2], x0 - x1),
         y0 - y1,
       ),
       z0 - z1,
