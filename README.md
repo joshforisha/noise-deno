@@ -1,6 +1,6 @@
-# Noise
+![Noise example](images/noise.png)
 
-A variety of standardized noise algorithms for Deno.
+**Noise**&emsp;A variety of standardized noise algorithms for Deno.
 
 ## Implemented Algorithms
 
